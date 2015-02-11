@@ -7,7 +7,7 @@
 
 module.exports = {
   home: function(req, res) {
-    return res.json({
+    return res.view({
       todo: 'Not implemented yet!',
     });
   },
