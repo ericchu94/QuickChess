@@ -1,0 +1,25 @@
+#game-home {
+	text-align: center;
+	padding: 10px;
+}
+
+#game-home #board {
+	line-height: 0;
+	border: 4px solid #855E42;
+	box-shadow: 5px 5px 2px 2px;
+	display: inline-block;
+}
+
+#game-home .square {
+	width: 80px;
+	height: 80px;
+	display: inline-block;
+}
+
+#game-home .square-white {
+	background: #e4b04a;
+}
+
+#game-home .square-black {
+	background: #6B4226;
+}
