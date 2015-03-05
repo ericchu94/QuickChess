@@ -15,7 +15,7 @@ module.exports = {
   home: function(req, res) {
     return res.view({
       //todo: 'Not implemented yet!',
-      specs: spectators,
+      specs: spectators.join(', '),
     });
   },
 };

@@ -1,6 +1,4 @@
 #game-home {
-	text-align: center;
-	padding: 10px;
 }
 
 #game-home #board {
@@ -8,12 +6,26 @@
 	border: 4px solid #855E42;
 	box-shadow: 5px 5px 2px 2px;
 	display: inline-block;
+	margin: 7px;
 }
 
 #game-home .square {
-	width: 80px;
-	height: 80px;
-	display: inline-block;
+	width: 75px;
+	height: 75px;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#game-home .piece {
+	font-size: 64px;
+}
+
+#game-home .piece-white {
+	color: #eee;
+}
+
+#game-home .piece-black {
+	color: #111;
 }
 
 #game-home .square-white {
