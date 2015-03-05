@@ -7,21 +7,23 @@
   <div class="row">
     <div class="col-lg-12 text-center">
       <div id="board">
-        <div class="square text-center square-white" id="square-a8"><div class="piece piece-white piece-r">R</div></div><div class="square text-center square-black" id="square-b8">N</div><div class="square text-center square-white" id="square-c8">B</div><div class="square text-center square-black" id="square-d8">Q</div><div class="square text-center square-white" id="square-e8">K</div><div class="square text-center square-black" id="square-f8">B</div><div class="square text-center square-white" id="square-g8">N</div><div class="square text-center square-black" id="square-h8">R</div><br>
-        <div class="square text-center square-black" id="square-a7">P</div><div class="square text-center square-white" id="square-b7">P</div><div class="square text-center square-black" id="square-c7">P</div><div class="square text-center square-white" id="square-d7">P</div><div class="square text-center square-black" id="square-e7">P</div><div class="square text-center square-white" id="square-f7">P</div><div class="square text-center square-black" id="square-g7">P</div><div class="square text-center square-white" id="square-h7">P</div><br>
-        <div class="square text-center square-white" id="square-a6"></div><div class="square text-center square-black" id="square-b6"></div><div class="square text-center square-white" id="square-c6"></div><div class="square text-center square-black" id="square-d6"></div><div class="square text-center square-white" id="square-e6"></div><div class="square text-center square-black" id="square-f6"></div><div class="square text-center square-white" id="square-g6"></div><div class="square text-center square-black" id="square-h6"></div><br>
-        <div class="square text-center square-black" id="square-a5"></div><div class="square text-center square-white" id="square-b5"></div><div class="square text-center square-black" id="square-c5"></div><div class="square text-center square-white" id="square-d5"></div><div class="square text-center square-black" id="square-e5"></div><div class="square text-center square-white" id="square-f5"></div><div class="square text-center square-black" id="square-g5"></div><div class="square text-center square-white" id="square-h5"></div><br>
-        <div class="square text-center square-white" id="square-a4"></div><div class="square text-center square-black" id="square-b4"></div><div class="square text-center square-white" id="square-c4"></div><div class="square text-center square-black" id="square-d4"></div><div class="square text-center square-white" id="square-e4"></div><div class="square text-center square-black" id="square-f4"></div><div class="square text-center square-white" id="square-g4"></div><div class="square text-center square-black" id="square-h4"></div><br>
-        <div class="square text-center square-black" id="square-a3"></div><div class="square text-center square-white" id="square-b3"></div><div class="square text-center square-black" id="square-c3"></div><div class="square text-center square-white" id="square-d3"></div><div class="square text-center square-black" id="square-e3"></div><div class="square text-center square-white" id="square-f3"></div><div class="square text-center square-black" id="square-g3"></div><div class="square text-center square-white" id="square-h3"></div><br>
-        <div class="square text-center square-white" id="square-a2"><div class="piece piece-black piece-p">P</div></div><div class="square text-center square-black" id="square-b2">P</div><div class="square text-center square-white" id="square-c2">P</div><div class="square text-center square-black" id="square-d2">P</div><div class="square text-center square-white" id="square-e2">P</div><div class="square text-center square-black" id="square-f2">P</div><div class="square text-center square-white" id="square-g2">P</div><div class="square text-center square-black" id="square-h2">P</div><br>
-        <div class="square text-center square-black" id="square-a1"></div><div class="square text-center square-white" id="square-b1">N</div><div class="square text-center square-black" id="square-c1">B</div><div class="square text-center square-white" id="square-d1">Q</div><div class="square text-center square-black" id="square-e1">K</div><div class="square text-center square-white" id="square-f1">B</div><div class="square text-center square-black" id="square-g1">N</div><div class="square text-center square-white" id="square-h1">R</div>
+        <% for (var i = 0; i < 8; ++i) { %>
+          <% for (var j = 0; j < 8; ++j) { %>
+            <div class="square text-center square-<%= ((i + j) % 2) ? "white" : "black" %>" id=square-<%= String.fromCharCode(97 + j) + (i + 1) %>">
+              <% if (board[i][j]) { %>
+                <div class="piece piece-<%= board[i][j].color %> piece-<%= board[i][j].piece %>"><%= board[i][j].piece.toUpperCase() %></div>
+              <% } %>
+            </div>
+          <% } %>
+          <br>
+        <% } %>
       </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-lg-12 text-center">
-      Player 1
+      Player 2
     </div>
   </div>
 
