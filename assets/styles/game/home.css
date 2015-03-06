@@ -7,6 +7,9 @@
 	box-shadow: 5px 5px 2px 2px;
 	display: inline-block;
 	margin: 7px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 #game-home .square {
@@ -14,10 +17,16 @@
 	height: 75px;
 	display: table-cell;
 	vertical-align: middle;
+	cursor: pointer;
 }
 
 #game-home .piece {
 	font-size: 64px;
+	cursor: inherit;
+}
+
+#game-home .piece.active {
+	color: yellow;
 }
 
 #game-home .piece-white {
