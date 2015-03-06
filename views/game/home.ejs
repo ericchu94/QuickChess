@@ -9,7 +9,7 @@
       <div id="board">
         <% for (var i = 0; i < 8; ++i) { %>
           <% for (var j = 0; j < 8; ++j) { %>
-            <div class="square text-center square-<%= ((i + j) % 2) ? "white" : "black" %>" id=square-<%= String.fromCharCode(97 + j) + (i + 1) %>">
+            <div class="square text-center square-<%= ((i + j) % 2) ? "white" : "black" %>" id="square-<%= (j + 1) %><%= (i + 1) %>">
               <% if (board[i][j]) { %>
                 <div class="piece piece-<%= board[i][j].color %> piece-<%= board[i][j].piece %>"><%= board[i][j].piece.toUpperCase() %></div>
               <% } %>
