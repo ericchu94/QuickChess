@@ -34,6 +34,7 @@ module.exports.routes = {
 
   '/': 'GameController.home',
   '/move': 'GameController.move',
+  '/new': 'GameController.new',
 
   /***************************************************************************
   *                                                                          *

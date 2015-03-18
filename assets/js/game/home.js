@@ -38,9 +38,36 @@ $(function () {
       }
     }
   });
+  
+  $('.controls-new').on('click', function () {
+    io.socket.post('/new', function (resData, jwres) {
+      if (jwres.statusCode == 200) {
+        setBoard(resData);
+      }
+    });
+  });
 
   io.socket.on('move', movePiece);
 });
+
+function setBoard(board) {
+  $('.piece').remove();
+  var grid = board.grid;
+  for (var j = 0; j < grid.length; ++j) {
+    for (var i = 0; i < grid[j].length; ++i) {
+      var piece = grid[i][j];
+      if (piece) {
+        $('#square-' + (i + 1) + (j + 1)).append(createPiece(piece));
+      }
+    }
+  }
+}
+
+function createPiece(piece) {
+  var name = piece.name;
+  var color = piece.color;
+  return '<div class="piece piece-' + color + ' piece-' + name + '">' + name.toUpperCase() + '</div>';
+}
 
 function getNotation($square) {
   return $square.attr('id').substr(7);

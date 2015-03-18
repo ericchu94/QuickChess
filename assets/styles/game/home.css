@@ -13,8 +13,8 @@
 }
 
 #game-home .square {
-	width: 75px;
-	height: 75px;
+	width: 70px;
+	height: 70px;
 	display: table-cell;
 	vertical-align: middle;
 	cursor: pointer;
@@ -43,4 +43,8 @@
 
 #game-home .square-black {
 	background: #6B4226;
+}
+
+#game-home .controls {
+	margin-top: 8px;
 }
