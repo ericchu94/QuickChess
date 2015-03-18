@@ -111,7 +111,8 @@ module.exports = {
 
   new: function (req, res) {
     board = new Board();
-    return res.json(board);
+    sails.sockets.blast('new', board);
+    return res.ok();
   },
 };
 

@@ -40,14 +40,11 @@ $(function () {
   });
   
   $('.controls-new').on('click', function () {
-    io.socket.post('/new', function (resData, jwres) {
-      if (jwres.statusCode == 200) {
-        setBoard(resData);
-      }
-    });
+    io.socket.post('/new');
   });
 
   io.socket.on('move', movePiece);
+  io.socket.on('new', setBoard);
 });
 
 function setBoard(board) {
