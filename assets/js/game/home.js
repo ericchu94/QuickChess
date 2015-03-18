@@ -20,9 +20,14 @@ $(function () {
         // Request a move to target square
         var start = getNotation($activePiece.parents('.square'));
         var end = getNotation($(this));
-        io.socket.post('/move', {
+        var move = {
           start: start,
           end: end,
+        };
+        io.socket.post('/move', move, function (resData, jwres) {
+          if (jwres.statusCode == 200) {
+            movePiece(move);
+          }
         });
         console.log('Requesting ' + start + ' to ' + end);
       }
@@ -32,9 +37,20 @@ $(function () {
         $piece.addClass('active');
       }
     }
-  })
+  });
+
+  io.socket.on('move', movePiece);
 });
 
 function getNotation($square) {
   return $square.attr('id').substr(7);
+}
+
+function movePiece(move) {
+  var $start = $('#square-' + move.start);
+  var $end = $('#square-' + move.end);
+  var $piece = $start.children('.piece');
+  $piece.detach();
+  $end.empty();
+  $end.append($piece);
 }

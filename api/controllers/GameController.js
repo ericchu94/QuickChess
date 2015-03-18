@@ -57,13 +57,41 @@ var defaultBoard = [
 
 var spectators = [chance.name(), chance.name(), chance.name(), chance.name()];
 
+function getCoord(coord) {
+  coord = parseInt(coord);
+  
+  if (!coord)
+    return null;
+  
+  var unit = coord % 10;
+  if (unit == 9 || unit == 0 || coord < 11 || coord > 88)
+    return null;
+  
+  return coord;
+}
+
 module.exports = {
-  home: function(req, res) {
+  home: function (req, res) {
     return res.view({
       //todo: 'Not implemented yet!',
       specs: spectators.join(', '),
       board: defaultBoard,
     });
   },
+
+  move: function (req, res) {
+    var start = getCoord(req.body.start);
+    var end = getCoord(req.body.end);
+
+    if (!start || !end) {
+      return res.badRequest();
+    }
+
+    sails.sockets.blast('move', {
+      start: start,
+      end: end,
+    }, req.socket);
+    return res.ok();
+  }
 };
 
