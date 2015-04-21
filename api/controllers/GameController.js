@@ -3,6 +3,7 @@
  *
  * @description :: Server-side logic for managing games
  * @help        :: See http://links.sailsjs.org/docs/controllers
+ * @reference   :: http://en.wikipedia.org/wiki/ICCF_numeric_notation
  */
 
 var Chance = require('chance');
@@ -29,6 +30,7 @@ Piece.Name = Object.freeze({
 
 function Board() {
   this.grid = [];
+  this.turn = Piece.Color.WHITE;
 
   for (var i = 0; i < 8; ++i) {
     this.grid.push([]);
@@ -59,13 +61,34 @@ function Board() {
   this.grid[7][7] = new Piece(Piece.Name.ROOK, Piece.Color.BLACK);
 }
 
-Board.prototype.movePiece = function (start, end) {
-  var file = Math.floor(start / 10) - 1;
-  var rank = (start % 10) - 1;
+Board.prototype.getPiece = function(coord) {
+  var file = Math.floor(coord / 10) - 1;
+  var rank = (coord % 10) - 1;
   var piece = this.grid[file][rank];
-  this.grid[Math.floor(end / 10) - 1][(end % 10) - 1] = piece;
-  this.grid[file][rank] = null;
+  return piece;
+};
+
+Board.prototype.setPiece = function(coord, piece) {
+  var file = Math.floor(coord / 10) - 1;
+  var rank = (coord % 10) - 1;
+  this.grid[file][rank] = piece;
+};
+
+Board.prototype.movePiece = function (start, end) {
+  var piece = this.getPiece(start);
+  this.setPiece(end, piece);
+  this.setPiece(start, null);
+  this.switchTurn();
 }
+
+Board.prototype.switchTurn = function() {
+  if (this.turn == Piece.Color.WHITE) {
+    this.turn = Piece.Color.BLACK;
+  } else {
+    this.turn = Piece.Color.WHITE;
+  }
+};
+
 
 var board = new Board();
 
@@ -97,6 +120,22 @@ module.exports = {
     var end = getCoord(req.body.end);
 
     if (!start || !end) {
+      return res.badRequest();
+    }
+    if (start == end) {
+      return res.badRequest();
+    }
+
+    var startPiece = board.getPiece(start);
+    var endPiece = board.getPiece(end);
+
+    if (!startPiece) {
+      return res.badRequest();
+    }
+    if (endPiece && startPiece.color == endPiece.color) {
+      return res.badRequest();
+    }
+    if (startPiece.color != board.turn) {
       return res.badRequest();
     }
 
