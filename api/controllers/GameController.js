@@ -132,6 +132,7 @@ module.exports = {
     if (!startPiece) {
       return res.badRequest();
     }
+    // TODO: Extract into get valid moves
     if (endPiece && startPiece.color == endPiece.color) {
       return res.badRequest();
     }
