@@ -16,7 +16,7 @@
       <div id="board">
         <% for (var j = 7; j >= 0; --j) { %>
           <% for (var i = 0; i < 8; ++i) { %>
-            <div class="square text-center square-<%= ((i + j) % 2) ? "white" : "black" %>" id="square-<%= (i + 1) %><%= (j + 1) %>">
+            <div class="square text-center square-<%= ((i + j) % 2) ? "white" : "black" %>" data-file="<%= i %>" data-rank="<%= j %>">
               <% if (board.grid[i][j]) { %>
                 <div class="piece piece-<%= board.grid[i][j].color %> piece-<%= board.grid[i][j].name %>"><%= board.grid[i][j].name.toUpperCase() %></div>
               <% } %>

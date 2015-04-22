@@ -62,15 +62,15 @@ function Board() {
 }
 
 Board.prototype.getPiece = function(coord) {
-  var file = Math.floor(coord / 10) - 1;
-  var rank = (coord % 10) - 1;
+  var file = coord.file;
+  var rank = coord.rank;
   var piece = this.grid[file][rank];
   return piece;
 };
 
 Board.prototype.setPiece = function(coord, piece) {
-  var file = Math.floor(coord / 10) - 1;
-  var rank = (coord % 10) - 1;
+  var file = coord.file;
+  var rank = coord.rank;
   this.grid[file][rank] = piece;
 };
 
@@ -95,16 +95,19 @@ var board = new Board();
 var spectators = [chance.name(), chance.name(), chance.name(), chance.name()];
 
 function getCoord(coord) {
-  coord = parseInt(coord);
+  var file = parseInt(coord.file);
+  var rank = parseInt(coord.rank);
 
-  if (!coord)
+  if (isNaN(file) || isNaN(rank))
     return null;
 
-  var unit = coord % 10;
-  if (unit == 9 || unit == 0 || coord < 11 || coord > 88)
+  if (file < 0 || file > 7 || rank < 0 || rank > 7)
     return null;
 
-  return coord;
+  return {
+    file: file,
+    rank: rank,
+  };
 }
 
 module.exports = {

@@ -29,7 +29,7 @@ $(function () {
             movePiece(move);
           }
         });
-        console.log('Requesting ' + start + ' to ' + end);
+        console.log('Requesting', start, 'to', end);
       }
     } else {
       if ($piece.length) {
@@ -67,12 +67,19 @@ function createPiece(piece) {
 }
 
 function getNotation($square) {
-  return $square.attr('id').substr(7);
+  return {
+    file: $square.data('file'),
+    rank: $square.data('rank'),
+  };
+}
+
+function getSquare(coord) {
+  return $('.square[data-file="' + coord.file + '"][data-rank="' + coord.rank + '"]');
 }
 
 function movePiece(move) {
-  var $start = $('#square-' + move.start);
-  var $end = $('#square-' + move.end);
+  var $start = getSquare(move.start);;
+  var $end = getSquare(move.end);;
   var $piece = $start.children('.piece');
   $piece.detach();
   $end.empty();
